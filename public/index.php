@@ -44,13 +44,19 @@ try {
     require __DIR__ . '/../app/views/shell.php';
 } catch (ApiException $e) {
     http_response_code($e->status);
-    header('Content-Type: text/plain; charset=utf-8');
-    echo $e->getMessage();
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store');
+    echo json_encode(['ok' => false, 'error' => $e->getMessage()], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     exit;
 } catch (Throwable $e) {
     error_log('diardrive: ' . $e->getMessage());
     http_response_code(500);
-    header('Content-Type: text/plain; charset=utf-8');
-    echo 'Terjadi kesalahan di server.';
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store');
+    if (config('app.debug')) {
+        echo json_encode(['ok' => false, 'error' => $e->getMessage(), 'file' => $e->getFile(), 'line' => $e->getLine()], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    } else {
+        echo json_encode(['ok' => false, 'error' => 'Terjadi kesalahan di server.'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
     exit;
 }
