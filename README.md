@@ -1,7 +1,21 @@
-# DiarDrive — File Browser Self-Hosted ala Google Drive
+# DiarDrive — File Browser Self-Hosted yang Ringan
 
-Aplikasi penyimpanan cloud pribadi (self-hosted) dengan tampilan terinspirasi
-Google Drive, dibangun di atas PHP 8.5 + MariaDB + Caddy + Cloudflare Tunnel.
+**DiarDrive** adalah aplikasi penyimpanan cloud pribadi (*self-hosted file browser*)
+yang sengaja dibuat **sangat ringan** — tanpa framework, tanpa build step, tanpa
+dependency eksternal — tetapi tetap menampilkan **interface yang familiar** layaknya
+Google Drive yang biasa kita pakai sehari-hari.
+
+Proyek ini terinspirasi dari kesederhanaan **FileBrowse** (file browser minimalis
+yang langsung ke inti: lihat, unggah, unduh, hapus) dan ditambah **tampilan ala
+Google Drive** (sidebar My Drive / Starred / Trash, grid & list view, breadcrumb
+folder, drag-and-drop upload, search). Hasilnya: aplikasi yang nyaman dipakai,
+ringan di server kecil sekalipun, dan tidak butuh RAM ginjal untuk jalan.
+
+Dibangun di atas PHP 8.5 + MariaDB + Caddy + Cloudflare Tunnel, dengan autentikasi
+JWT stateless yang tersimpan di `localStorage` browser.
+
+> Cocok untuk: NAS rumahan, VPS kecil, server pribadi, atau di dalam jaringan
+> kantor yang butuh cloud storage sendiri tanpa langganan bulanan.
 
 ## Fitur
 
