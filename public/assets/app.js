@@ -108,7 +108,7 @@
                     '<div id="login-err" class="login-error" style="display:none;"></div>' +
                     '<div class="field">' +
                         '<label for="email">Email</label>' +
-                        '<input type="email" id="email" required placeholder="achmad@diaraji.my.id">' +
+                        '<input type="email" id="email" required placeholder="email@anda.id">' +
                     '</div>' +
                     '<div class="field">' +
                         '<label for="password">Password</label>' +
