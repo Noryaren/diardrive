@@ -93,7 +93,7 @@ function api_dispatch(string $method, string $path): void
             $isTrash = $view === 'trash' ? 1 : 0;
             $sLike = like_term($search);
 
-            $fStmt = db()->prepare('SELECT id, folder_id, name, created_at FROM folders WHERE user_id = ? AND name LIKE ? ORDER BY name ASC');
+            $fStmt = db()->prepare('SELECT id, parent_id AS folder_id, name, created_at FROM folders WHERE user_id = ? AND name LIKE ? ORDER BY name ASC');
             $fStmt->execute([$userId, $sLike]);
             $folders = $fStmt->fetchAll();
 
@@ -102,7 +102,7 @@ function api_dispatch(string $method, string $path): void
             $files = $fiStmt->fetchAll();
         } else {
             if ($view === 'starred') {
-                $fStmt = db()->prepare('SELECT id, folder_id, name, created_at FROM folders WHERE user_id = ? AND 0 = 1');
+                $fStmt = db()->prepare('SELECT id, parent_id AS folder_id, name, created_at FROM folders WHERE user_id = ? AND 0 = 1');
                 $fStmt->execute([$userId]);
                 $folders = $fStmt->fetchAll();
 
@@ -110,7 +110,7 @@ function api_dispatch(string $method, string $path): void
                 $fiStmt->execute([$userId]);
                 $files = $fiStmt->fetchAll();
             } elseif ($view === 'trash') {
-                $fStmt = db()->prepare('SELECT id, folder_id, name, created_at FROM folders WHERE user_id = ? AND 0 = 1');
+                $fStmt = db()->prepare('SELECT id, parent_id AS folder_id, name, created_at FROM folders WHERE user_id = ? AND 0 = 1');
                 $fStmt->execute([$userId]);
                 $folders = $fStmt->fetchAll();
 
@@ -119,7 +119,7 @@ function api_dispatch(string $method, string $path): void
                 $files = $fiStmt->fetchAll();
             } else {
                 // Normal folder view
-                $fStmt = db()->prepare('SELECT id, folder_id, name, created_at FROM folders WHERE user_id = ? AND ' . ($folderId === null ? 'parent_id IS NULL' : 'parent_id = ?') . ' ORDER BY name ASC');
+                $fStmt = db()->prepare('SELECT id, parent_id AS folder_id, name, created_at FROM folders WHERE user_id = ? AND ' . ($folderId === null ? 'parent_id IS NULL' : 'parent_id = ?') . ' ORDER BY name ASC');
                 $fStmt->execute($folderId === null ? [$userId] : [$userId, $folderId]);
                 $folders = $fStmt->fetchAll();
 
