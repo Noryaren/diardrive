@@ -21,7 +21,7 @@ function config(?string $key = null, mixed $default = null): mixed
             'db' => [
                 'dsn'  => getenv('DB_DSN') ?: 'mysql:host=127.0.0.1;port=3307;dbname=diardrive;charset=utf8mb4',
                 'user' => getenv('DB_USER') ?: 'diardrive',
-                'pass' => getenv('DB_PASS') ?: 'DiarDrive_DB_2026',
+                'pass' => getenv('DB_PASS') ?: '',
             ],
             'storage' => [
                 'path' => getenv('STORAGE_PATH') ?: ROOT_PATH . '/storage',

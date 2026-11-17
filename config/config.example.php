@@ -18,7 +18,7 @@ return [
     'db' => [
         'dsn'  => 'mysql:host=127.0.0.1;port=3307;dbname=diardrive;charset=utf8mb4',
         'user' => 'diardrive',
-        'pass' => 'DiarDrive_DB_2026',
+        'pass' => 'YOUR_DB_PASSWORD_HERE',
     ],
 
     'upload' => [

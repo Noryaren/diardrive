@@ -58,7 +58,7 @@ diardrive/
 3. Sesuaikan `config/config.php` (DSN, user, pass, storage root).
 4. Buat superadmin:
    ```bash
-   php bin/create-user.php "Achmad Diaraji" achmad@diaraji.my.id "Neonecromancer@4321"
+   php bin/create-user.php "Nama Lengkap" email@anda.id "password-anda"
    ```
 5. Pastikan `storage/` writable oleh `www-data`.
 6. Tambahkan blok Caddy dari `deploy/Caddyfile.example` ke `/etc/caddy/Caddyfile`, lalu:
