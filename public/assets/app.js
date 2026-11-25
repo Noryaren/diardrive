@@ -8,11 +8,14 @@
         view: 'my', // 'my', 'starred', 'trash', 'admin'
         search: '',
         viewMode: localStorage.getItem('diardrive_view_mode') || 'grid', // 'grid', 'list'
+        theme: localStorage.getItem('diardrive_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
         breadcrumb: [],
         folders: [],
         files: [],
         users: [] // for admin view
     };
+
+    document.documentElement.setAttribute('data-theme', state.theme);
 
     function h(str) {
         return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
@@ -158,6 +161,9 @@
                         '<input type="text" id="search-input" placeholder="Cari di DiarDrive" value="' + h(state.search) + '">' +
                     '</div>' +
                     '<div class="header-user">' +
+                        '<button class="btn" id="theme-toggle" title="Ubah Tema">' +
+                            '<svg class="icon"><use href="#icon-' + (state.theme === 'dark' ? 'sun' : 'moon') + '"></use></svg>' +
+                        '</button>' +
                         '<div class="user-avatar">' + (state.user ? state.user.name.charAt(0).toUpperCase() : 'U') + '</div>' +
                         '<button class="btn btn-logout" id="logout-btn" title="Keluar">' +
                             '<svg class="icon"><use href="#icon-logout"></use></svg>' +
@@ -206,6 +212,13 @@
 
         // Setup Event Listeners
         document.getElementById('logout-btn').addEventListener('click', logout);
+
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            state.theme = state.theme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('diardrive_theme', state.theme);
+            document.documentElement.setAttribute('data-theme', state.theme);
+            this.querySelector('use').setAttribute('href', '#icon-' + (state.theme === 'dark' ? 'sun' : 'moon'));
+        });
 
         document.getElementById('brand-logo').addEventListener('click', function(e) {
             e.preventDefault();
